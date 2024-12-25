@@ -1,18 +1,12 @@
 import requests
-import json
 
 class SlackIntegration:
     def __init__(self, slack_bot_token):
-        
-        """
-        Initialize the SlackIntegration class with the provided Slack bot token.
-        
-        :param slack_bot_token: The token used to authenticate with the Slack API.
-        """
         self.slack_bot_token = slack_bot_token
+        # print(self.slack_bot_token)
+
 
     def get_slack_user_id(self, email):
-        
         """
         Fetch Slack user ID using their email.
         
@@ -20,15 +14,25 @@ class SlackIntegration:
         :return: The Slack user ID if found, otherwise None.
         """
         url = "https://slack.com/api/users.lookupByEmail"
-        headers = {"Authorization": f"Bearer {self.slack_bot_token}"}
-        response = requests.get(url, headers=headers, params={"email": email})
+        headers = {
+            "Authorization": f"Bearer {self.slack_bot_token}",
+            "Content-Type": "application/json"
+        }
+
+        params = {"email": email}
+       
+        # print(email) --
+        response = requests.get(url, headers=headers, params=params)
+        # print(response.json())
+        # print(response.headers)
+        # print(f"Response Status Code: {response.status_code}")
+        # print(f"Response Text: {response.text}")
         
         if response.status_code == 200:
             data = response.json()
-            # Check if the response indicates success
-            if data.get("ok"):
-                # Extract and return the user ID from the response
-                return data.get("user", {}).get("id")
+            # print(data)
+            if data.get('ok'):
+                return data['user']['id']
             else:
                 print(f"Error fetching Slack user ID: {data.get('error')}")
         else:
@@ -36,39 +40,22 @@ class SlackIntegration:
         return None
 
     def send_slack_dm(self, user_id, ticket_key, summary, description, jira_link):
-        
-        """
-        Send a direct message to a Slack user.
-        
-        :param user_id: The Slack user ID to send the message to.
-        :param ticket_key: The key of the Jira ticket.
-        :param summary: The summary of the Jira ticket.
-        :param description: The description of the Jira ticket.
-        :param jira_link: The link to the Jira ticket.
-        """
-        url = "https://slack.com/api/chat.postMessage"
-        headers = {
-            "Authorization": f"Bearer {self.slack_bot_token}",
-            "Content-Type": "application/json"
-        }
-        message = {
+        """Send a direct message to Slack user with ticket details."""
+        url = f"https://slack.com/api/chat.postMessage"
+        headers = {"Authorization": f"Bearer {self.slack_bot_token}"}
+        message = f"Hey,<@{user_id}> you have been assign a new ticket !!\n Jira Ticket: {ticket_key}\nSummary: {summary}\nDescription: {description}\n{jira_link}"
+        # print(message)
+        data = {
             "channel": user_id,
-            "text": (
-                f"Hi,<@{user_id}> you have been assigned a new Jira ticket!\n\n"
-                f"*Ticket Key:* {ticket_key}\n"
-                f"*Summary:* {summary}\n"
-                f"*Description:* {description}\n"
-                f"<{jira_link}|View the Jira Issue>"
-            )
+            "text": message
         }
-        response = requests.post(url, headers=headers, data=json.dumps(message))
-        
-        if response.status_code == 200:
+        # print(data)
+        response = requests.post(url, headers=headers, data=data)
+        if(response.status_code==200):
             data = response.json()
-            # Check if the response indicates success
-            if data.get("ok"):
+            if(data.get('ok')):
                 print(f"Slack DM sent to user {user_id} for ticket {ticket_key}")
             else:
                 print(f"Error sending Slack DM: {data.get('error')}")
         else:
-            print(f"Failed to send Slack DM: {response.status_code}, {response.text}")
+            print(f"Failed to send message: {response.status_code}, {response.text}")
