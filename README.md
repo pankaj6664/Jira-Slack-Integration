@@ -21,11 +21,11 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
 - Add your environment variables in the format: KEY=VALUE.
 - Example .env file:
     ```python
-    JIRA_URL=https://pankaj-pawar1.atlassian.net/
-    JIRA_USERNAME=pankajpawar5259@gmail.com
-    JIRA_API_TOKEN=ATATT3xFfGF09Mt4NIdAbPHqy7PWGkcUwO3hI-f_APzYEoh5XmC-TflLI95G7u5TEGD6P_MJfteRaFNSXqmlJvh-FZiJPC2EUry04TaRq28OPoatNqaQvPO5PbMsNCKnz4yf_ntN7njVtfaZcJFx5EWOoVBPTAxwUWT7MmJnid5FnrkhhAPsbWo=F96D2417
-    PROJECT_KEY=PAN1,KAN
-    SLACK_BOT_TOKEN=xoxp-8215098509508-8198055880263-8209572566086-7816255ae16090dcbf8c50400b83c507
+    JIRA_URL= https://example.atlassian.net/
+    JIRA_USERNAME= dummyuser@example.com
+    JIRA_API_TOKEN= YOUR-JIRA-API-TOKEN
+    PROJECT_KEY=PROJ1,PROJ2
+    SLACK_BOT_TOKEN= YOUR-SLACK-TOKEN
     ```
 
 2. Update Your Python Code
@@ -81,3 +81,10 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
 - Notification in slack DM after update
 
     <img src="Images/Slack_Noti_2.png" alt="Slack Notification " width="500" />
+
+<br>
+<br>
+
+- Msg in Terminal when ticket is not updated
+
+    ![Alt text](Images/Unchanged_Noti.png "Terminal")
