@@ -1,12 +1,12 @@
-# Jira-Slack Integration
+# 📝 Jira-Slack Integration
 
 This project integrates Jira and Slack to notify Slack users about assigned Jira tickets. It fetches assigned tickets from Jira and sends direct messages to the corresponding Slack users.
 
-## Prerequisites
+## 📌 Prerequisites
 
 - Python 3.x
 
-## Installation
+## ⚙️ Installation
 
 1. Install the required Python packages:
 - The requirements.txt file is included in the repository.
@@ -15,8 +15,8 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
     pip install -r requirements.txt
     ```
 
-## Configuration
-1.  Create a .env File
+## 🔧 Configuration
+1️⃣.  Create a .env File
 - In the root directory of your project, create a file named .env.
 - Add your environment variables in the format: KEY=VALUE.
 - Example .env file:
@@ -28,7 +28,7 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
     SLACK_BOT_TOKEN= YOUR-SLACK-TOKEN
     ```
 
-2. Update Your Python Code
+2️⃣. Update Your Python Code
 - Use the load_dotenv() function to load the variables from the .env file into your Python environment.
     ```python
     from dotenv import load_dotenv
@@ -44,14 +44,14 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
     project_keys = os.getenv("PROJECT_KEYS")
     slack_bot_token = os.getenv("SLACK_BOT_TOKEN")
     ```
-## Project Structure
+## 📂 Project Structure
 
 - [main.py](http://_vscodecontentref_/3): Entry point of the application. Initializes and starts the integration process.
 - [jira_integration.py](http://_vscodecontentref_/4): Contains the [JiraIntegration](http://_vscodecontentref_/5) class to interact with the Jira API.
 - [slack_integration.py](http://_vscodecontentref_/6): Contains the [SlackIntegration](http://_vscodecontentref_/7) class to interact with the Slack API.
 - [jira_slack_integration.py](http://_vscodecontentref_/8): Contains the [JiraSlackIntegration](http://_vscodecontentref_/9) class to process Jira tickets and notify Slack users.
 
-## Run the Application
+## ▶️ Run the Application
 
 1. Run the [main.py](http://_vscodecontentref_/2) file to start the integration process:
     ```sh
@@ -62,7 +62,7 @@ This project integrates Jira and Slack to notify Slack users about assigned Jira
 
 
 
-## Below is a screenshot of the application in action:
+## 📸 Below is a screenshot of the application in action:
 - Msg in Terminal when ticket is created
  
     ![Alt text](Images/First_noti.png "Terminal")
